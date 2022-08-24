@@ -56,8 +56,8 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = 
-        cur.execute(songplay_table_insert, songplay_data)
+        song_data = df[['song_id','title','artist_id','year','duration']].values[0]
+        cur.execute(song_table_insert, song_data)
 
 
 def process_data(cur, conn, filepath, func):
