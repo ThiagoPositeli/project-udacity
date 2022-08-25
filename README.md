@@ -33,9 +33,13 @@ etl.py: Read the json files and do the ETL pipelines.
 
 
 songplays: Records in log data associated with song plays
+
 users: Users in the app
+
 songs: Songs in music database
+
 artists: Artists in music database
+
 time: Timestamps of records in songplays broken down into specific units
 
 
