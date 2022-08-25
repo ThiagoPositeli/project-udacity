@@ -8,56 +8,15 @@ time_table_drop = "DROP TABLE IF EXISTS time"
 
 # CREATE TABLES
 
-songplay_table_create = ("""CREATE TABLE songplays
-  (
-     songplay_id SERIAL PRIMARY KEY,
-     start_time  TIMESTAMP NOT NULL,
-     user_id     VARCHAR NOT NULL,
-     level       VARCHAR,
-     song_id     VARCHAR ,
-     artist_id   VARCHAR ,
-     session_id  INT NOT NULL,
-     location    VARCHAR,
-     user_agent  TEXT
-  )""")
+songplay_table_create = ("""CREATE TABLE songplays(songplay_id serial primary key, start_time timestamp not null, user_id varchar not null, level varchar, song_id varchar, artist_id varchar, session_id int not null, location varchar, user_agent text)""")
 
-user_table_create = ("""CREATE TABLE users
-  ( 
-     user_id int primary key, 
-     first_name varchar, 
-     last_name varchar, 
-     gender varchar, 
-     level varchar
-  )""")
+user_table_create = ("""CREATE TABLE users( user_id int primary key, first_name varchar, last_name varchar, gender varchar, level varchar)""")
 
-song_table_create = ("""CREATE TABLE songs
-  ( 
-     song_id varchar primary key, 
-     title varchar not null, 
-     artist_id varchar not null, 
-     year int, 
-     duration float
-  )""")
+song_table_create = ("""CREATE TABLE songs( song_id varchar primary key, title varchar not null, artist_id varchar not null, year int, duration float)""")
 
-artist_table_create = ("""CREATE TABLE artists
-  ( 
-    artist_id varchar primary key, 
-    name varchar not null, 
-    location varchar, 
-    latitude varchar, 
-    longitude float
-  )""")
+artist_table_create = ("""CREATE TABLE artists( artist_id varchar primary key, name varchar not null, location varchar, lattitude float, longitude float)""")
 
-time_table_create = ("""CREATE TABLE time
-  ( 
-    start_time timestamp primary key, 
-    hour int, 
-    day int, 
-    week int, 
-    month int, 
-    year int, 
-    weekday int 
-   )""")
+time_table_create = (""" CREATE TABLE time( start_time timestamp primary key, hour int, day int, week int, month int, year int, weekday int )""")
 
 # INSERT RECORDS
 
@@ -76,7 +35,7 @@ ON CONFLICT (song_id) DO NOTHING
 """)
 
 artist_table_insert = ("""
-INSERT INTO artists(artist_id, name, location, latitude, longitude)
+INSERT INTO artists(artist_id, name, location, lattitude, longitude)
 VALUES(%s, %s, %s, %s, %s)
 ON CONFLICT (artist_id) DO NOTHING
 """)

@@ -21,6 +21,12 @@ etl.py: Read the json files and do the ETL pipelines.
 
 
 
+
+
+
+
+
+
 <h4>Data Modeling database</h4>
 
 <img width="499" alt="Captura de Tela 2022-08-24 às 19 58 15" src="https://user-images.githubusercontent.com/92527247/186538058-84031fae-6bba-46ed-91b1-8bd32edb612b.png">

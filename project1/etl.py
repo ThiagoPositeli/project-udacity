@@ -6,12 +6,6 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
-    """This funcion are responsable for read a song file and
-    insert data to songs and artists tables
-    Args:
-        cur (psycopg2.cursor): The psycopg2 cursor
-        filepath (str): The location of the song file
-    """
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -25,12 +19,6 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
-    """This funcion are responsable read a log file and
-    insert data to time, users and songplays tables
-    Args:
-        cur (psycopg2.cursor): The psycopg2 cursor
-        filepath (str): The location of the log file
-    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -68,30 +56,16 @@ def process_log_file(cur, filepath):
             songid, artistid = None, None
 
         # insert songplay record
-        songplay_data = (pd.to_datetime(row.ts, unit='ms'), row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
+        songplay_data = (pd.to_datetime(row.ts, unit='ms'),row.userId,row.level,songid,artistid,row.sessionId,row.location,row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
 
 
 def process_data(cur, conn, filepath, func):
-    """
-    Description: This function is responsible for listing the files in a directory,
-    and then executing the ingest process for each file according to the function
-    that performs the transformation to save it to the database.
-
-    Arguments:
-        cur: the cursor object.
-        conn: connection to the database.
-        filepath: log data or song data file path.
-        func: function that transforms the data and inserts it into the database.
-
-    Returns:
-        None
-    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
-        files = glob.glob(os.path.join(root, '*.json'))
-        for f in files:
+        files = glob.glob(os.path.join(root,'*.json'))
+        for f in files :
             all_files.append(os.path.abspath(f))
 
     # get total number of files found
@@ -106,9 +80,7 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
-    conn = psycopg2.connect(
-        "host=127.0.0.1 dbname=sparkifydb user=student password=student"
-    )
+    conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
     process_data(cur, conn, filepath='data/song_data', func=process_song_file)
